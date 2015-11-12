@@ -15,7 +15,8 @@ import java.net.URL;
 public final class Connector {
 
     private final String api = "https://api.imgur.com/3/image";
-    private final String clientId = "Client-ID fdaa08c932d9a7e";
+    private final String request = "Client-ID";
+    private final String clientId = "fdaa08c932d9a7e";
     private final StringBuilder stringBuilder = new StringBuilder();
 
     public boolean connect() {
@@ -23,7 +24,7 @@ public final class Connector {
             final URL url = new URL(getApi());
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            final Image image = new Image();
+            final ScreenedImage image = new ScreenedImage();
             image.create();
             final String data = image.getData();
 
@@ -31,7 +32,7 @@ public final class Connector {
             connection.setDoInput(true);
 
             connection.setRequestMethod(RequestMethod.POST);
-            connection.setRequestProperty("Authorization", getClientId());
+            connection.setRequestProperty("Authorization", String.format("%s %s", request, clientId));
             connection.setRequestMethod(RequestMethod.POST);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
@@ -49,6 +50,7 @@ public final class Connector {
 
             BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
+
             while ((line = rd.readLine()) != null) {
                 stringBuilder.append(line).append("\n");
             }

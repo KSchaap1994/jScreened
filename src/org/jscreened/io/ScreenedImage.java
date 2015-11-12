@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 /**
  * Created by Kevin on 11-11-2015.
  */
-public final class Image {
+public final class ScreenedImage {
 
     private BufferedImage image = null;
     private File file = null;
@@ -20,7 +20,7 @@ public final class Image {
 
     public void create() {
         try {
-            file = new File("img.jpg");
+            file = new File("placeholder.jpg");
             image = ImageIO.read(file);
 
             final ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
