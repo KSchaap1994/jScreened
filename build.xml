@@ -58,8 +58,10 @@
   
   <!-- Project Libraries -->
   
-  <path id="library.commons-codec-1.10.classpath">
-    <pathelement location="${basedir}/libs/commons-codec-1.10.jar"/>
+  <path id="library.libs.classpath">
+    <fileset dir="${basedir}/libs">
+      <patternset refid="library.patterns"/>
+    </fileset>
   </path>
   
   
@@ -84,23 +86,23 @@
   </path>
   
   <path id="jscreened.module.production.classpath">
-    <path refid="library.commons-codec-1.10.classpath"/>
+    <path refid="library.libs.classpath"/>
   </path>
   
   <path id="jscreened.runtime.production.module.classpath">
     <pathelement location="${jscreened.output.dir}"/>
-    <path refid="library.commons-codec-1.10.classpath"/>
+    <path refid="library.libs.classpath"/>
   </path>
   
   <path id="jscreened.module.classpath">
     <pathelement location="${jscreened.output.dir}"/>
-    <path refid="library.commons-codec-1.10.classpath"/>
+    <path refid="library.libs.classpath"/>
   </path>
   
   <path id="jscreened.runtime.module.classpath">
     <pathelement location="${jscreened.testoutput.dir}"/>
     <pathelement location="${jscreened.output.dir}"/>
-    <path refid="library.commons-codec-1.10.classpath"/>
+    <path refid="library.libs.classpath"/>
   </path>
   
   
