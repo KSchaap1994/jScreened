@@ -1,11 +1,11 @@
 package org.jscreened.ui;
 
-import javax.imageio.ImageIO;
+import resources.ResourceHelper;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA
@@ -20,12 +20,8 @@ public final class Notifier {
     private final TrayIcon TRAY_ICON;
 
     public Notifier() {
-        try {
-            TRAY_IMAGE = ImageIO.read(Notifier.class.getResourceAsStream("/resources/Tray.png"));
-            TRAY_ICON = makeIcon();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        TRAY_IMAGE = ResourceHelper.loadImage("Tray.png");
+        TRAY_ICON = makeIcon();
     }
 
     public void start() {
@@ -65,6 +61,7 @@ public final class Notifier {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+
         }
 
         @Override
