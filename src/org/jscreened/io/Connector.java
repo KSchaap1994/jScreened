@@ -1,11 +1,12 @@
 package org.jscreened.io;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import org.jscreened.util.RequestMethod;
+import org.jscreened.util.gson.Response;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -17,7 +18,7 @@ public final class Connector {
     private final String api = "https://api.imgur.com/3/image";
     private final String request = "Client-ID";
     private final String clientId = "fdaa08c932d9a7e";
-    private final StringBuilder stringBuilder = new StringBuilder();
+    private Response response;
 
     public boolean connect() {
         try {
@@ -33,29 +34,31 @@ public final class Connector {
 
             connection.setRequestMethod(RequestMethod.POST);
             connection.setRequestProperty("Authorization", String.format("%s %s", request, clientId));
-            connection.setRequestMethod(RequestMethod.POST);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            System.out.println(data);
-
             connection.connect();
-
-            System.out.println("Connected");
 
             final OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
             osw.write(data);
             osw.flush();
 
-            System.out.println("Writing data");
-
-            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
-
-            while ((line = rd.readLine()) != null) {
-                stringBuilder.append(line).append("\n");
+            int bytesRead;
+            final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            final InputStream is = connection.getInputStream();
+            final byte[] bytes = new byte[1024];
+            while ((bytesRead = is.read(bytes, 0, bytes.length)) > 0) {
+                buffer.write(bytes, 0, bytesRead);
             }
 
-            rd.close();
+            buffer.flush();
+
+            final StringReader sr = new StringReader(buffer.toString());
+
+            final Gson gson = new GsonBuilder().create();
+            final JsonReader reader = new JsonReader(sr);
+
+            response = gson.fromJson(reader, Response.class);
+
             osw.close();
 
             return true;
@@ -65,13 +68,8 @@ public final class Connector {
         }
     }
 
-    private void setResponse() {
-
-    }
-
-    public String getResponse() {
-        String output = stringBuilder.toString();
-        return output;
+    public Response getResponse() {
+        return response;
     }
 
     public String getApi() {

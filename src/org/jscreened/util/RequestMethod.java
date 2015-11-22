@@ -3,7 +3,7 @@ package org.jscreened.util;
 /**
  * Created by Kevin on 11-11-2015.
  */
-public class RequestMethod {
+public final class RequestMethod {
 
     public static final String GET = "GET";
     public static final String POST = "POST";
