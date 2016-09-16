@@ -15,7 +15,7 @@
         <maven.compiler.testSource>1.8</maven.compiler.testSource>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <env.COVERALLS_REPO_TOKEN>Rhwd30qtQF45nO1QEe6ARfxAcqLm1M48a</env.COVERALLS_REPO_TOKEN>
+
     </properties>
 
     <dependencies>
@@ -38,7 +38,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.2.0</version>
                 <configuration>
-                    <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
+                    <repoToken>${env.repoToken}</repoToken>
                 </configuration>
             </plugin>
         </plugins>
