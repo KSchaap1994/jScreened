@@ -1,6 +1,6 @@
 package org.jscreened.ui;
 
-import resources.ResourceHelper;
+import org.jscreened.util.ResourceHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +20,7 @@ public final class Notifier {
     private final TrayIcon TRAY_ICON;
 
     public Notifier() {
-        TRAY_IMAGE = ResourceHelper.loadImage("Tray.png");
+        TRAY_IMAGE = ResourceHelper.loadImage("/Tray.png");
         TRAY_ICON = makeIcon();
     }
 
@@ -37,20 +37,21 @@ public final class Notifier {
 
             final PopupMenu menu = new PopupMenu();
 
-            final MenuItem item = new MenuItem("About");
-            item.addActionListener(e -> new About());
+            final MenuItem about = new MenuItem("About");
+            about.addActionListener(e -> new About());
 
-            menu.add(item);
+            final MenuItem exit = new MenuItem("Exit");
+            exit.addActionListener(e -> System.exit(2));
 
-            final MouseHandler mouseHandler = new MouseHandler();
+            menu.add(about);
+            menu.add(exit);
 
             TRAY_ICON.setPopupMenu(menu);
-            TRAY_ICON.addMouseListener(mouseHandler);
+            TRAY_ICON.addMouseListener(new MouseHandler());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private TrayIcon makeIcon() {
@@ -76,6 +77,7 @@ public final class Notifier {
 
         @Override
         public void mouseEntered(MouseEvent e) {
+
         }
 
         @Override

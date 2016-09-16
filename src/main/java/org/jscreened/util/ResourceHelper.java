@@ -1,4 +1,4 @@
-package resources;
+package org.jscreened.util;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

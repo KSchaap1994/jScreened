@@ -1,6 +1,6 @@
 package org.jscreened.ui;
 
-import resources.ResourceHelper;
+import org.jscreened.util.ResourceHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,8 @@ import java.awt.image.BufferedImage;
  */
 public class About extends JDialog {
 
-    private final BufferedImage image = ResourceHelper.loadImage("about.png");
+    private final BufferedImage image = ResourceHelper.loadImage("/about.png");
+
     public About() {
         super();
         setTitle("About");
