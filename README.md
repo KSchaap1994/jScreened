@@ -1,1 +1,1 @@
-# jScreened [![jScreened](https://travis-ci.org/KSchaap1994/jScreened.svg?branch=master)](https://travis-ci.org/KSchaap1994/jScreened)
+# jScreened [![jScreened](https://circleci.com/gh/KSchaap1994/jScreened.svg?style=svg)](https://circleci.com/gh/KSchaap1994/jScreened)
