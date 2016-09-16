@@ -1,10 +1,12 @@
 package org.jscreened.ui;
 
+import org.jscreened.util.KeyListener;
 import org.jscreened.util.ResourceHelper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 /**
@@ -18,10 +20,12 @@ public final class Notifier {
 
     private final BufferedImage TRAY_IMAGE;
     private final TrayIcon TRAY_ICON;
+    private final org.jscreened.util.KeyListener LISTENER;
 
     public Notifier() {
         TRAY_IMAGE = ResourceHelper.loadImage("/Tray.png");
         TRAY_ICON = makeIcon();
+        LISTENER = new KeyListener();
     }
 
     public void start() {
@@ -48,6 +52,7 @@ public final class Notifier {
 
             TRAY_ICON.setPopupMenu(menu);
             TRAY_ICON.addMouseListener(new MouseHandler());
+
 
         } catch (Exception e) {
             e.printStackTrace();
