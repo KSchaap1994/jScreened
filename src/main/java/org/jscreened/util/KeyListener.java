@@ -22,6 +22,7 @@ public class KeyListener implements NativeKeyListener {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException e) {
             e.printStackTrace();
+            return;
         }
         GlobalScreen.addNativeKeyListener(this);
     }

@@ -67,7 +67,7 @@ public final class SnipIt {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-
+                    
                 }
             };
             addMouseListener(adapter);

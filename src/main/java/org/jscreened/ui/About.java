@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
  * Time: 15:58
  * To change this template use File | Settings | File Templates.
  */
-public class About extends JDialog {
+public final class About extends JDialog {
 
     private final BufferedImage image = ResourceHelper.loadImage("/about.png");
 
