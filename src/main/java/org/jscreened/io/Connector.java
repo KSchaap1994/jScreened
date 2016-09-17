@@ -19,14 +19,18 @@ public final class Connector {
     private final String request = "Client-ID";
     private final String clientId = "fdaa08c932d9a7e";
     private Response response;
+    private final ScreenedImage image;
 
-    public boolean connect() {
+    public Connector(final ScreenedImage image) {
+        this.image = image;
+        connect();
+    }
+
+    private boolean connect() {
         try {
             final URL url = new URL(getApi());
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            final ScreenedImage image = new ScreenedImage();
-            image.create();
             final String data = image.getData();
 
             connection.setDoOutput(true);
@@ -58,6 +62,7 @@ public final class Connector {
             final JsonReader reader = new JsonReader(sr);
 
             response = gson.fromJson(reader, Response.class);
+            System.out.println(response.getData().getLink());
 
             osw.close();
 

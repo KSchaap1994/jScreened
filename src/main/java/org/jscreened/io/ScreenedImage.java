@@ -15,14 +15,16 @@ import java.io.IOException;
  */
 public final class ScreenedImage {
 
-    private BufferedImage image = null;
-    private File file = null;
+    private final BufferedImage image;
     private String data = null;
 
-    public void create() {
+    public ScreenedImage(final BufferedImage image) {
+        this.image = image;
+        create();
+    }
+
+    private void create() {
         try {
-            file = new File("placeholder.jpg");
-            image = ImageIO.read(file);
 
             final ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
             ImageIO.write(image, "png", byteArray);

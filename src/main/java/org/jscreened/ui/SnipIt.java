@@ -1,5 +1,8 @@
 package org.jscreened.ui;
 
+import org.jscreened.io.Connector;
+import org.jscreened.io.ScreenedImage;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -8,18 +11,18 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
+import java.awt.image.BufferedImage;
 
-public final class SnipIt {
+public final class SnipIt extends JFrame {
 
     public SnipIt() {
-        JFrame frame = new JFrame();
-        frame.setUndecorated(true);
-        frame.setBackground(new Color(0, 0, 0, 0));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        frame.add(new SnipItPane());
-        frame.setBounds(getVirtualBounds());
-        frame.setVisible(true);
+        setUndecorated(true);
+        setBackground(new Color(0, 0, 0, 0));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        add(new SnipItPane());
+        setBounds(getVirtualBounds());
+        setVisible(true);
     }
 
     public class SnipItPane extends JPanel {
@@ -34,6 +37,7 @@ public final class SnipIt {
             setLayout(null);
             selectionPane = new SelectionPane();
             add(selectionPane);
+
             MouseAdapter adapter = new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -67,7 +71,15 @@ public final class SnipIt {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    
+                    SnipIt.super.dispose();
+                    try {
+                        final Robot robot = new Robot();
+                        final BufferedImage image = robot.createScreenCapture(selectionPane.getVisibleRect());
+                        final ScreenedImage screenedImage = new ScreenedImage(image);
+                        new Connector(screenedImage);
+                    } catch (AWTException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             };
             addMouseListener(adapter);

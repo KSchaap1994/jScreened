@@ -1,5 +1,6 @@
-package org.jscreened.ui;
+package org.jscreened.ui.tray;
 
+import org.jscreened.ui.About;
 import org.jscreened.util.KeyListener;
 import org.jscreened.util.ResourceHelper;
 
