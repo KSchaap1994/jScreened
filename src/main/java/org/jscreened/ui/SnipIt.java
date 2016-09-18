@@ -1,7 +1,7 @@
 package org.jscreened.ui;
 
-import org.jscreened.io.Connector;
-import org.jscreened.io.ScreenedImage;
+import com.kschaap1994.imgur.ImgurClient;
+import org.apache.commons.imaging.ImageFormats;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public final class SnipIt extends JFrame {
 
@@ -31,6 +34,10 @@ public final class SnipIt extends JFrame {
         private Point dragPoint;
 
         private SelectionPane selectionPane;
+        private int x;
+        private int y;
+        private int width;
+        private int height;
 
         private SnipItPane() {
             setOpaque(false);
@@ -50,11 +57,11 @@ public final class SnipIt extends JFrame {
                 @Override
                 public void mouseDragged(MouseEvent e) {
                     dragPoint = e.getPoint();
-                    int width = dragPoint.x - mouseAnchor.x;
-                    int height = dragPoint.y - mouseAnchor.y;
+                    width = dragPoint.x - mouseAnchor.x;
+                    height = dragPoint.y - mouseAnchor.y;
 
-                    int x = mouseAnchor.x;
-                    int y = mouseAnchor.y;
+                    x = mouseAnchor.x;
+                    y = mouseAnchor.y;
 
                     if (width < 0) {
                         x = dragPoint.x;
@@ -74,10 +81,16 @@ public final class SnipIt extends JFrame {
                     SnipIt.super.dispose();
                     try {
                         final Robot robot = new Robot();
-                        final BufferedImage image = robot.createScreenCapture(selectionPane.getVisibleRect());
-                        final ScreenedImage screenedImage = new ScreenedImage(image);
-                        new Connector(screenedImage);
-                    } catch (AWTException e1) {
+                        final BufferedImage image = robot.createScreenCapture(new Rectangle(x, y, width, height));
+
+                        final ImgurClient client = new ImgurClient("fdaa08c932d9a7e");
+                        final com.kschaap1994.imgur.model.Image imgurImage = client.uploadImage(image, ImageFormats.PNG);
+
+                        if (Desktop.isDesktopSupported()) {
+                            Desktop.getDesktop().browse(new URI(imgurImage.link));
+                        }
+
+                    } catch (AWTException | URISyntaxException | IOException e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -158,10 +171,7 @@ public final class SnipIt extends JFrame {
         final Rectangle bounds = new Rectangle(0, 0, 0, 0);
 
         final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        final GraphicsDevice[] lstGDs = ge.getScreenDevices();
-        for (GraphicsDevice gd : lstGDs) {
-            bounds.add(gd.getDefaultConfiguration().getBounds());
-        }
+        bounds.add(ge.getDefaultScreenDevice().getDefaultConfiguration().getBounds());
 
         return bounds;
     }

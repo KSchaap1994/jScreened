@@ -24,7 +24,7 @@ public final class Notifier {
     private final org.jscreened.util.KeyListener LISTENER;
 
     public Notifier() {
-        TRAY_IMAGE = ResourceHelper.loadImage("/Tray.png");
+        TRAY_IMAGE = ResourceHelper.loadImage("/tray.png");
         TRAY_ICON = makeIcon();
         LISTENER = new KeyListener();
     }
@@ -68,7 +68,8 @@ public final class Notifier {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-
+            if (e.isPopupTrigger())
+                TRAY_ICON.getPopupMenu().show(e.getComponent(), e.getX(), e.getY());
         }
 
         @Override

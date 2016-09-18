@@ -22,8 +22,8 @@ public final class JScreened {
 
         Utils.disableLogging(); //disable jNativeHook logging
 
+
         final Notifier notifier = new Notifier();
         notifier.start();
-
     }
 }
