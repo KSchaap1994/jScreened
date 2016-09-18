@@ -1,4 +1,4 @@
-package org.jscreened.ui;
+package com.kschaap1994.jscreened.ui;
 
 import com.kschaap1994.imgur.ImgurClient;
 import org.apache.commons.imaging.ImageFormats;

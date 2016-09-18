@@ -1,10 +1,10 @@
-package org.jscreened.util;
+package com.kschaap1994.jscreened.util;
 
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import org.jscreened.ui.SnipIt;
+import com.kschaap1994.jscreened.ui.SnipIt;
 
 /**
  * Created by IntelliJ IDEA

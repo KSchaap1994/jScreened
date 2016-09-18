@@ -1,8 +1,8 @@
-package org.jscreened.ui.tray;
+package com.kschaap1994.jscreened.ui.tray;
 
-import org.jscreened.ui.About;
-import org.jscreened.util.KeyListener;
-import org.jscreened.util.ResourceHelper;
+import com.kschaap1994.jscreened.ui.About;
+import com.kschaap1994.jscreened.util.KeyListener;
+import com.kschaap1994.jscreened.util.ResourceHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public final class Notifier {
 
     private final BufferedImage TRAY_IMAGE;
     private final TrayIcon TRAY_ICON;
-    private final org.jscreened.util.KeyListener LISTENER;
+    private final com.kschaap1994.jscreened.util.KeyListener LISTENER;
 
     public Notifier() {
         TRAY_IMAGE = ResourceHelper.loadImage("/tray.png");

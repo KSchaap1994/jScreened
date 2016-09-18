@@ -1,6 +1,6 @@
-package org.jscreened.ui;
+package com.kschaap1994.jscreened.ui;
 
-import org.jscreened.util.ResourceHelper;
+import com.kschaap1994.jscreened.util.ResourceHelper;
 
 import javax.swing.*;
 import java.awt.*;

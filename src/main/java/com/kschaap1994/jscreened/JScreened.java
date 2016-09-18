@@ -1,7 +1,7 @@
-package org.jscreened;
+package com.kschaap1994.jscreened;
 
-import org.jscreened.ui.tray.Notifier;
-import org.jscreened.util.Utils;
+import com.kschaap1994.jscreened.ui.tray.Notifier;
+import com.kschaap1994.jscreened.util.Utils;
 
 import javax.swing.*;
 import java.awt.*;
